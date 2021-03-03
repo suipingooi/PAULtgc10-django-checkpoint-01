@@ -1,8 +1,8 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 
 # Create your views here.
 
 
 # define a view function
 def index(request):
-    return HttpResponse("Hello World")
+    return render(request, "books/index-template.html")
