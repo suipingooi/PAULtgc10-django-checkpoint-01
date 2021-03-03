@@ -19,5 +19,7 @@ import books.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('books/', books.views.index)
+    path('books/', books.views.index),
+    path('books/create', books.views.create_book),
+    path('books/update/<book_id>', books.views.update_book)
 ]
