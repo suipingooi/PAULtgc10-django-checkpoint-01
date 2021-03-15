@@ -11,6 +11,9 @@ class Book(models.Model):
     # TextField is the TEXT in MySQL (65000 characters)
     desc = models.TextField(blank=False)
 
+    # define the relationship with the genre
+    genre = models.ForeignKey('Genre', on_delete=models.CASCADE)
+
     def __str__(self):
         return self.title
 
@@ -22,3 +25,10 @@ class Publisher(models.Model):
     # toString function
     def __str__(self):
         return self.name + " (" + self.email + ")"
+
+
+class Genre(models.Model):
+    title = models.CharField(blank=False, max_length=255)
+
+    def __str__(self):
+        return self.title
