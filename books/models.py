@@ -14,6 +14,9 @@ class Book(models.Model):
     # define the relationship with the genre
     genre = models.ForeignKey('Genre', on_delete=models.CASCADE)
 
+    # define the relationship with the tags
+    tags = models.ManyToManyField('Tag')
+
     def __str__(self):
         return self.title
 
@@ -28,6 +31,13 @@ class Publisher(models.Model):
 
 
 class Genre(models.Model):
+    title = models.CharField(blank=False, max_length=255)
+
+    def __str__(self):
+        return self.title
+
+
+class Tag(models.Model):
     title = models.CharField(blank=False, max_length=255)
 
     def __str__(self):
