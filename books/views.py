@@ -106,3 +106,18 @@ def update_publisher(request, publisher_id):
         return render(request, 'books/update-publisher-template.html', {
             'publisher_form': publisher_form
         })
+
+
+def delete_publisher(request, publisher_id):
+    # process the delete if the method is POST
+    if request.method == "POST":
+        publisher_to_delete = get_object_or_404(Publisher, pk=publisher_id)
+        publisher_to_delete.delete()
+        return redirect(reverse(show_publishers))
+    else:
+        # 1. retrieve the publisher that I want to delete
+        publisher_to_delete = get_object_or_404(Publisher, pk=publisher_id)
+
+        return render(request, 'books/delete-publisher-template.html', {
+            'publisher': publisher_to_delete
+        })
