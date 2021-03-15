@@ -73,3 +73,36 @@ def show_publishers(request):
     return render(request, 'books/index-publishers-template.html', {
         'publishers': all_publishers
     })
+
+
+def update_publisher(request, publisher_id):
+    if request.method == "POST":
+        # 1. retrieve the publisher object that is being updated
+        publisher_being_updated = get_object_or_404(Publisher, pk=publisher_id)
+
+        # 2. create the update form
+        update_form = PublisherForm(
+            request.POST, instance=publisher_being_updated)
+
+        # 3. check the form for errors
+        if update_form.is_valid():
+            # if is valid
+            update_form.save()
+            return redirect(reverse(show_publishers))
+        else:
+            return render(request, 'books/update-publisher-template.html', {
+                'publisher_form': update_form
+            })
+
+    else:
+        # 1. retrieve the publisher that I want to update from the database
+        publisher_to_update = get_object_or_404(Publisher, pk=publisher_id)
+
+        # 2. create the form and initialize its fields with the publisher data
+        # from step 1
+        publisher_form = PublisherForm(instance=publisher_to_update)
+
+        # 3 rener the form
+        return render(request, 'books/update-publisher-template.html', {
+            'publisher_form': publisher_form
+        })
