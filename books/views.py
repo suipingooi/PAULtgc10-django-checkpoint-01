@@ -1,6 +1,6 @@
-from django.shortcuts import render, reverse, redirect, get_object_or_404
-from .models import Book
-from .forms import BookForm
+from django.shortcuts import render, reverse, redirect, get_object_or_404, HttpResponse
+from .models import Book, Publisher
+from .forms import BookForm, PublisherForm
 # Create your views here.
 
 
@@ -49,3 +49,27 @@ def update_book(request, book_id):
         return render(request, 'books/update-template.html', {
             'form': book_form
         })
+
+
+def create_publisher(request):
+    if request.method == "POST":
+        create_publisher_form = PublisherForm(request.POST)
+        if create_publisher_form.is_valid():
+            create_publisher_form.save()
+            return HttpResponse("New publisher created")
+        else:
+            return HttpResponse("Error creating publisher")
+
+    else:
+        form = PublisherForm()
+        return render(request, 'books/create-publisher-template.html', {
+            'form': form
+        })
+
+
+def show_publishers(request):
+    # select * from publishers
+    all_publishers = Publisher.objects.all()
+    return render(request, 'books/index-publishers-template.html', {
+        'publishers': all_publishers
+    })

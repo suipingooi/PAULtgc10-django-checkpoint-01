@@ -13,3 +13,12 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Publisher(models.Model):
+    name = models.CharField(blank=False, max_length=200)
+    email = models.EmailField(blank=False, max_length=320)
+
+    # toString function
+    def __str__(self):
+        return self.name + " (" + self.email + ")"
