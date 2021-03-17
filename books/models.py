@@ -17,6 +17,14 @@ class Book(models.Model):
     # define the relationship with the tags
     tags = models.ManyToManyField('Tag')
 
+    # define the relationship with the publisher model
+    # models.CASCADE means -- if the publisher is deleted, then
+    # the book will be deleted as well
+    publisher = models.ForeignKey('Publisher', on_delete=models.CASCADE)
+
+    # define the M:N relationship with authors
+    authors = models.ManyToManyField('Author')
+
     def __str__(self):
         return self.title
 
@@ -42,3 +50,12 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Author(models.Model):
+    first_name = models.CharField(blank=False, max_length=255)
+    last_name = models.CharField(blank=False, max_length=255)
+    date_of_birth = models.DateTimeField(blank=False)
+
+    def __str__(self):
+        return self.first_name + " " + self.last_name
