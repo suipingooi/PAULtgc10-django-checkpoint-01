@@ -1,6 +1,7 @@
-from django.shortcuts import render, reverse, redirect, get_object_or_404, HttpResponse
-from .models import Book, Publisher
+from django.contrib import messages
 from .forms import BookForm, PublisherForm
+from .models import Book, Publisher
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 # Create your views here.
 
 
@@ -21,6 +22,8 @@ def create_book(request):
         if create_form.is_valid():
             create_form.save()
             # redirect back to the index function
+            messages.success(
+                request, 'New book has been created successfully!')
             return redirect(reverse(index))
         pass
     else:

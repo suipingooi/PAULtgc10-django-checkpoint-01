@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'crispy_forms',
     'books'
 ]
 
@@ -165,3 +166,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
