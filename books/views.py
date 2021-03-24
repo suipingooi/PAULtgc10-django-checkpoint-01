@@ -8,6 +8,13 @@ from django.shortcuts import render, reverse, redirect, get_object_or_404
 # define a view function
 def index(request):
     books = Book.objects.all()  # eqv. SELECT * FROM books
+
+    # query = Q(genre__exact=2)
+    # query = query & Q(tags__in=1, 4)
+
+    # books = books.filter(query)
+    query = ~Q(pk__in=[])
+
     return render(request, "books/index-template.html", {
         'books': books
     })
