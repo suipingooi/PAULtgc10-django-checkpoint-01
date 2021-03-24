@@ -13,7 +13,7 @@ def index(request):
     # query = query & Q(tags__in=1, 4)
 
     # books = books.filter(query)
-    query = ~Q(pk__in=[])
+    # query = ~Q(pk__in=[])
 
     return render(request, "books/index-template.html", {
         'books': books
